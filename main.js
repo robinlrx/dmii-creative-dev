@@ -174,6 +174,7 @@ setInterval(function() {
 
 }, 150)
 
+
 // const clearButton = document.getElementById('clear')
 // clearButton.addEventListener('click', () => {
 // 	while(scene.children.length > 0){ 
