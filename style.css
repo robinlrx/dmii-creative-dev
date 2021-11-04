@@ -1,0 +1,20 @@
+html, body {
+	margin: 0;
+	/* background-image: linear-gradient(to bottom,  #11e8bb 0%,#8200c9 100%) */
+}
+
+button {
+	position: absolute;
+	border-radius: 50px;
+	outline: none;
+	border: none;
+	padding: 10px 20px;
+	background-color: rgb(255, 102, 0);
+	color: white;
+	font-weight: bold;
+}
+
+#clear {
+	bottom: 10px;
+	left: 10px;
+}
