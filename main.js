@@ -170,9 +170,7 @@ setInterval(function() {
 	else if (rnd >= 0.75) {
 		createCone
 	}
-	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](mouse.x, mouse.y, mouse.z) //replace simplex.noise2D(mouse.x, mouse.y)
-
-	// Clear scene
+	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](mouse.x, mouse.y, mouse.z)
 
 }, 150)
 
@@ -192,5 +190,3 @@ const update = () => {
 	renderer.render(scene, camera);
 }
 requestAnimationFrame(update)
-
-//faire disparaitre shape avec kle son
