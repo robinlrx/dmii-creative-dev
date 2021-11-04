@@ -172,7 +172,7 @@ setInterval(function() {
 	}
 	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](mouse.x, mouse.y, mouse.z)
 
-}, 150)
+}, 100)
 
 // const clearButton = document.getElementById('clear')
 // clearButton.addEventListener('click', () => {
