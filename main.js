@@ -148,6 +148,18 @@ canvas.addEventListener('mousemove', (e) => {
 	
 });
 
+// grid
+// const margin = 5
+// for (let i = 0; i < 10; i++) {
+// 	var x = i * margin;
+
+// 	for (let j = 0; i < 10; j++) {
+// 		var y = j * margin
+// 	}
+
+// 	createCube(x, y)
+// }
+
 // random functions
 const shapeArray = [createCube, createSphere, createTorus, createCone]
 
@@ -173,7 +185,6 @@ setInterval(function() {
 	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](mouse.x, mouse.y, mouse.z)
 
 }, 150)
-
 
 // const clearButton = document.getElementById('clear')
 // clearButton.addEventListener('click', () => {
