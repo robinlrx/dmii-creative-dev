@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="/style.css">
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div class="main-container">
-		<canvas class="main-canvas"></canvas>
-		<button>sound</button>
-	</div>
-	<script src="https://unpkg.com/three@0.134.0/build/three.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			background-color: black;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		a {
+			/* position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(50%, -50%); */
+			border-radius: 50px;
+			outline: none;
+			border: none;
+			padding: 10px 20px;
+			background-color: rgb(255, 102, 0);
+			color: white;
+			font-weight: bold;
+			text-decoration: none;
+		}
+
+		h1 {
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<h1>Batterie</h1>
+	<a href="./home.html">Commencer</a>
+</body>
 </html>
