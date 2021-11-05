@@ -58,8 +58,8 @@ const createCube = (positionX, positionY, positionZ) => {
 	const cubeTl = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
 	// cubeTl.to(cube.scale, { x: 2, ease: Expo.easeOut, duration: 0.5 }); // coté 1
 	// cubeTl.to(cube.scale, { z: 2, ease: Expo.easeOut, duration: 0.5}); // coté 2
-	cubeTl.to(cube.scale, { x: 2, y: 2, z: 2, ease: Elastic.easeOut, duration: 1 }); // hauteur
-	cubeTl.to(cube.scale, { x: 1, y: 1, z: 1, ease: Expo.easeOut, duration: 1 }); // scale down
+	cubeTl.to(cube.scale, { x: 2, y: 2, z: 2, ease: Elastic.easeOut, duration: 0.5 }); // hauteur
+	cubeTl.to(cube.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 	// cubeTl.to(cube.rotation, { y: -Math.PI, ease: Expo.easeOut, duration: 0.8 }); // rotate
 
 	const sound = new Audio('./sounds/boom.wav');
@@ -81,7 +81,7 @@ const createSphere = (positionX, positionY, positionZ) => {
 	// gsap
 	const sphereTl = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
 	sphereTl.to(sphere.scale, { x: 2, y: 2, z: 2, ease: Expo.easeOut, duration: 0.5 }); // scale up
-	sphereTl.to(sphere.scale, { x: 1, y: 1, z: 1, ease: Expo.easeOut, duration: 1 }); // scale down
+	sphereTl.to(sphere.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 
 	const sound = new Audio('./sounds/snare.wav');
 	sound.loop = false;
@@ -103,7 +103,7 @@ const createTorus = (positionX, positionY, positionZ) => {
 	// gsap
 	const torusTl = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
 	torusTl.to(torus.scale, { x: 3, y: 3, z: 3, ease: Expo.easeOut, duration: 0.5 }); // scale up
-	torusTl.to(torus.scale, { x: 1, y: 1, z: 1, ease: Expo.easeOut, duration: 1 }); // scale down
+	torusTl.to(torus.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 
 	const sound = new Audio('./sounds/tink.wav');
 	sound.loop = false;
@@ -125,7 +125,7 @@ const createCone = (positionX, positionY, positionZ) => {
 	// gsap
 	const coneTL = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
 	coneTL.to(cone.scale, { x: 3, y: 5, z: 3, ease: Expo.easeOut, duration: 0.5 }); // scale up
-	coneTL.to(cone.scale, { x: 1, y: 1, z: 1, ease: Expo.easeOut, duration: 1 }); // scale down
+	coneTL.to(cone.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 
 	const sound = new Audio('./sounds/tom.wav');
 	sound.loop = false;
@@ -142,7 +142,7 @@ canvas.addEventListener('mousemove', (e) => {
 	mouse.z = 0
 	mouse.unproject(camera);
 
-	while(scene.children.length > 30){ 
+	while(scene.children.length > 10){ 
 		scene.remove(scene.children[0]); 
 	}
 	
@@ -184,7 +184,7 @@ setInterval(function() {
 	}
 	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](mouse.x, mouse.y, mouse.z)
 
-}, 150)
+}, 100)
 
 // const clearButton = document.getElementById('clear')
 // clearButton.addEventListener('click', () => {
