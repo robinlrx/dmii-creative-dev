@@ -38,11 +38,10 @@ const axesHelper = new THREE.AxesHelper(200); //size of axes, The X axis is red.
 
 // texture loader
 const textureLoader = new THREE.TextureLoader()
-const texture = textureLoader.load('./img/textures.png')
-const color = 0xffffff
+const texture = textureLoader.load('./img/texture.png')
 
 //cube function
-const createCube = (positionX, positionY, positionZ) => {
+const createCube = (color,positionX, positionY, positionZ) => {
 	const geometry = new THREE.BoxGeometry(20, 20, 20);
 	const material = new THREE.MeshMatcapMaterial({
 		matcap: texture,
@@ -62,12 +61,12 @@ const createCube = (positionX, positionY, positionZ) => {
 	cubeTl.to(cube.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 	// cubeTl.to(cube.rotation, { y: -Math.PI, ease: Expo.easeOut, duration: 0.8 }); // rotate
 
-	const sound = new Audio('./sounds/boom.wav');
-	sound.loop = false;
-	sound.play();
+	// const sound = new Audio('./sounds/boom.wav');
+	// sound.loop = false;
+	// sound.play();
 }
 
-const createSphere = (positionX, positionY, positionZ) => {
+const createSphere = (color, positionX, positionY, positionZ) => {
 	const geometry = new THREE.SphereGeometry( 15, 32, 16 );
 	const material = new THREE.MeshMatcapMaterial({
 		matcap: texture,
@@ -83,13 +82,13 @@ const createSphere = (positionX, positionY, positionZ) => {
 	sphereTl.to(sphere.scale, { x: 2, y: 2, z: 2, ease: Expo.easeOut, duration: 0.5 }); // scale up
 	sphereTl.to(sphere.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 
-	const sound = new Audio('./sounds/snare.wav');
-	sound.loop = false;
-	sound.play();
+	// const sound = new Audio('./sounds/snare.wav');
+	// sound.loop = false;
+	// sound.play();
 
 }
 
-const createTorus = (positionX, positionY, positionZ) => {
+const createTorus = (color, positionX, positionY, positionZ) => {
 	const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
 	const material = new THREE.MeshMatcapMaterial({
 		matcap: texture,
@@ -105,13 +104,13 @@ const createTorus = (positionX, positionY, positionZ) => {
 	torusTl.to(torus.scale, { x: 3, y: 3, z: 3, ease: Expo.easeOut, duration: 0.5 }); // scale up
 	torusTl.to(torus.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 
-	const sound = new Audio('./sounds/tink.wav');
-	sound.loop = false;
-	sound.play();
+	// const sound = new Audio('./sounds/tink.wav');
+	// sound.loop = false;
+	// sound.play();
 
 }
 
-const createCone = (positionX, positionY, positionZ) => {
+const createCone = (color, positionX, positionY, positionZ) => {
 	const geometry = new THREE.ConeGeometry( 5, 20, 32 );
 	const material = new THREE.MeshMatcapMaterial({
 		matcap: texture,
@@ -127,38 +126,37 @@ const createCone = (positionX, positionY, positionZ) => {
 	coneTL.to(cone.scale, { x: 3, y: 5, z: 3, ease: Expo.easeOut, duration: 0.5 }); // scale up
 	coneTL.to(cone.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
 
-	const sound = new Audio('./sounds/tom.wav');
-	sound.loop = false;
-	sound.play();
+	// const sound = new Audio('./sounds/tom.wav');
+	// sound.loop = false;
+	// sound.play();
 
 }
 
-
+const clientMouse = {x: 0, y: 0}
 const mouse = new THREE.Vector3();
+const GRID_SIZE = 20
+
 canvas.addEventListener('mousemove', (e) => {
 	
-	mouse.x = (e.clientX / window.innerWidth) * 2 - 1
-	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
+	let nx = Math.floor((e.clientX/window.innerWidth)*GRID_SIZE)
+	nx /= GRID_SIZE
+	nx *= window.innerWidth
+
+	let ny = Math.floor((e.clientY/window.innerHeight)*GRID_SIZE)
+	ny /= GRID_SIZE
+	ny *= window.innerHeight
+	mouse.x = (nx / window.innerWidth) * 2 - 1
+	mouse.y = -(ny / window.innerHeight) * 2 + 1
 	mouse.z = 0
 	mouse.unproject(camera);
 
-	while(scene.children.length > 10){ 
+	clientMouse.x = e.clientX
+
+	while(scene.children.length > 30){ 
 		scene.remove(scene.children[0]); 
 	}
 	
 });
-
-// grid
-// const margin = 5
-// for (let i = 0; i < 10; i++) {
-// 	var x = i * margin;
-
-// 	for (let j = 0; i < 10; j++) {
-// 		var y = j * margin
-// 	}
-
-// 	createCube(x, y)
-// }
 
 // random functions
 const shapeArray = [createCube, createSphere, createTorus, createCone]
@@ -168,8 +166,15 @@ setInterval(function() {
 	const scale = .5
 	const x = mouse.x / window.innerWidth
 	const y = mouse.y / window.innerHeight
-	const rnd = simplex.noise2D(x * scale, y * scale)
-	console.log(rnd)
+	let rnd = simplex.noise2D(x * scale, y * scale)
+
+	const color1 = new THREE.Color(0xff0000)
+	const color2 = new THREE.Color(0xffffff)
+
+	// const lerpColor = new THREE.Color().lerp(color1, rnd) 
+	const lerpColor = new THREE.Color().lerpColors(color1, color2, rnd) 
+
+	// console.log(rnd)
 	if (rnd < 0.25) {
 		createCube
 	} 
@@ -182,16 +187,9 @@ setInterval(function() {
 	else if (rnd >= 0.75) {
 		createCone
 	}
-	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](mouse.x, mouse.y, mouse.z)
+	shapeArray[ Math.floor(Math.abs(rnd) * shapeArray.length ) ](lerpColor, mouse.x, mouse.y, mouse.z)
 
 }, 100)
-
-// const clearButton = document.getElementById('clear')
-// clearButton.addEventListener('click', () => {
-// 	while(scene.children.length > 0){ 
-// 		scene.remove(scene.children[0]); 
-// 	}
-// })
 
 
 // à chaque image : 60fps
