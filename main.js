@@ -55,15 +55,16 @@ const createCube = (color,positionX, positionY, positionZ) => {
 
 	// gsap
 	const cubeTl = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
-	// cubeTl.to(cube.scale, { x: 2, ease: Expo.easeOut, duration: 0.5 }); // coté 1
-	// cubeTl.to(cube.scale, { z: 2, ease: Expo.easeOut, duration: 0.5}); // coté 2
-	cubeTl.to(cube.scale, { x: 2, y: 2, z: 2, ease: Elastic.easeOut, duration: 0.5 }); // hauteur
-	cubeTl.to(cube.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
-	// cubeTl.to(cube.rotation, { y: -Math.PI, ease: Expo.easeOut, duration: 0.8 }); // rotate
+	cubeTl.to(cube.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 0.5 }); // scale down
+	cubeTl.to(cube.scale, { x: 2, y: 2, z: 2, ease: Elastic.easeOut, duration: 1 }); // scale up
 
-	// const sound = new Audio('./sounds/boom.wav');
-	// sound.loop = false;
-	// sound.play();
+	const sound = new Audio('./sounds/boom.wav');
+	sound.loop = false;
+	sound.volume = 0.2
+	sound.play();
+
+	renderer.setClearColor('#03045E', 0.4);
+
 }
 
 const createSphere = (color, positionX, positionY, positionZ) => {
@@ -79,12 +80,16 @@ const createSphere = (color, positionX, positionY, positionZ) => {
 
 	// gsap
 	const sphereTl = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
-	sphereTl.to(sphere.scale, { x: 2, y: 2, z: 2, ease: Expo.easeOut, duration: 0.5 }); // scale up
-	sphereTl.to(sphere.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
+	sphereTl.to(sphere.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 0.5 }); // scale down
+	sphereTl.to(sphere.scale, { x: 2, y: 2, z: 2, ease: Expo.easeOut, duration: 1 }); // scale up
 
-	// const sound = new Audio('./sounds/snare.wav');
-	// sound.loop = false;
-	// sound.play();
+	// sound
+	const sound = new Audio('./sounds/snare.wav');
+	sound.loop = false;
+	sound.volume = 0.2
+	sound.play();
+
+	renderer.setClearColor('#0077B6', 0.4);
 
 }
 
@@ -101,12 +106,16 @@ const createTorus = (color, positionX, positionY, positionZ) => {
 
 	// gsap
 	const torusTl = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
-	torusTl.to(torus.scale, { x: 3, y: 3, z: 3, ease: Expo.easeOut, duration: 0.5 }); // scale up
-	torusTl.to(torus.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
+	torusTl.to(torus.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 0.5 }); // scale down
+	torusTl.to(torus.scale, { x: 3, y: 3, z: 3, ease: Expo.easeOut, duration: 1 }); // scale up
 
-	// const sound = new Audio('./sounds/tink.wav');
-	// sound.loop = false;
-	// sound.play();
+	// sound
+	const sound = new Audio('./sounds/tink.wav');
+	sound.loop = false;
+	sound.volume = 0.2
+	sound.play();
+
+	renderer.setClearColor('#00B4D8', 0.4);
 
 }
 
@@ -123,12 +132,16 @@ const createCone = (color, positionX, positionY, positionZ) => {
 
 	// gsap
 	const coneTL = new gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
-	coneTL.to(cone.scale, { x: 3, y: 5, z: 3, ease: Expo.easeOut, duration: 0.5 }); // scale up
-	coneTL.to(cone.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 1 }); // scale down
+	coneTL.to(cone.scale, { x: 0, y: 0, z: 0, ease: Expo.easeOut, duration: 0.5 }); // scale down
+	coneTL.to(cone.scale, { x: 3, y: 5, z: 3, ease: Expo.easeOut, duration: 1 }); // scale up
 
-	// const sound = new Audio('./sounds/tom.wav');
-	// sound.loop = false;
-	// sound.play();
+	// sound
+	const sound = new Audio('./sounds/tom.wav');
+	sound.loop = false;
+	sound.volume = 0.2
+	sound.play();
+
+	renderer.setClearColor('#90E0EF', 0.4);
 
 }
 
@@ -152,11 +165,12 @@ canvas.addEventListener('mousemove', (e) => {
 
 	clientMouse.x = e.clientX
 
-	while(scene.children.length > 30){ 
-		scene.remove(scene.children[0]); 
+	while(scene.children.length > 20){ 
+		scene.remove(scene.children[0]);
 	}
-	
+
 });
+
 
 // random functions
 const shapeArray = [createCube, createSphere, createTorus, createCone]
@@ -168,8 +182,8 @@ setInterval(function() {
 	const y = mouse.y / window.innerHeight
 	let rnd = simplex.noise2D(x * scale, y * scale)
 
-	const color1 = new THREE.Color(0xff0000)
-	const color2 = new THREE.Color(0xffffff)
+	const color1 = new THREE.Color(0xe67e22)
+	const color2 = new THREE.Color(0xe74c3c)
 
 	// const lerpColor = new THREE.Color().lerp(color1, rnd) 
 	const lerpColor = new THREE.Color().lerpColors(color1, color2, rnd) 
