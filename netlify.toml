@@ -1,1 +1,4 @@
-/home              /home
+[[redirects]]
+  from = "/home"
+  to = "/home"
+  status = 301
